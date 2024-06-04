@@ -65,7 +65,7 @@ const HousingPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="propane">Water</label>
+          <label htmlFor="water">Water</label>
           <input
             id="water"
             type="number"
