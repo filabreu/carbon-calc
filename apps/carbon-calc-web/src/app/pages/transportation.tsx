@@ -5,6 +5,7 @@ import { useFormsData } from "../context/forms-data-context";
 interface FormValues {
   milesDriven: number;
   milesPerGallon: number;
+  fuelType: string;
 }
 
 const TransportationPage = () => {
@@ -26,7 +27,7 @@ const TransportationPage = () => {
       <h1>Transportation</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="milesDriven">Miles Driven</label>
+          <label htmlFor="milesDriven">Personal Vehicle Miles Driven / week</label>
           <input
             id="milesDriven"
             type="number"
@@ -37,7 +38,7 @@ const TransportationPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="milesPerGallon">Miles Per Gallon</label>
+          <label htmlFor="milesPerGallon">Personal Vehicle Miles Per Gallon</label>
           <input
             id="milesPerGallon"
             type="number"
@@ -46,6 +47,20 @@ const TransportationPage = () => {
               setFormValues({ ...formValues, milesPerGallon: Number(event.target.value) })
             }
           />
+        </div>
+        <div>
+          <label htmlFor="fuelType">Personal Vehicle Fuel Type</label>
+          <select
+            id="fuelType"
+            value={formValues.milesPerGallon}
+            onChange={(event) =>
+              setFormValues({ ...formValues, fuelType: event.target.value })
+            }
+          >
+            <option value="gasoline">Gasoline</option>
+            <option value="diesel">Diesel</option>
+            <option value="ethanol">Ethanol</option>
+          </select>
         </div>
       </form>
     </div>

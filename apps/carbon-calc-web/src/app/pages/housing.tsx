@@ -7,15 +7,16 @@ interface FormValues {
   naturalGas: number;
   heatingOil: number;
   propane: number;
+  water: number;
 }
 
-const HomeEnergyPage = () => {
+const HousingPage = () => {
   const { formsData, setFormsData } = useFormsData();
 
-  const { homeEnergy: formValues } = formsData;
+  const { housing: formValues } = formsData;
 
   const setFormValues = (formValues: FormValues) => {
-    setFormsData({ ...formsData, homeEnergy: formValues });
+    setFormsData({ ...formsData, housing: formValues });
   };
 
   const handleSubmit = (event: FormEvent) => {
@@ -25,7 +26,7 @@ const HomeEnergyPage = () => {
 
   return (
     <div>
-      <h1>Home Energy</h1>
+      <h1>Housing</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="naturalGas">Natural Gas</label>
@@ -63,9 +64,18 @@ const HomeEnergyPage = () => {
             onChange={(event) => setFormValues({ ...formValues, propane: Number(event.target.value) })}
           />
         </div>
+        <div>
+          <label htmlFor="propane">Water</label>
+          <input
+            id="water"
+            type="number"
+            value={formValues.water}
+            onChange={(event) => setFormValues({ ...formValues, water: Number(event.target.value) })}
+          />
+        </div>
       </form>
     </div>
   )
 }
 
-export default HomeEnergyPage;
+export default HousingPage;

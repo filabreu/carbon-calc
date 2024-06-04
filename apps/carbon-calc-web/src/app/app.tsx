@@ -2,7 +2,7 @@ import { Route, Routes, Link } from 'react-router-dom';
 
 import { FormsDataProvider } from './context/forms-data-context';
 import StartPage from './pages/start';
-import HomeEnergyPage from './pages/home-energy';
+import HousingPage from './pages/housing';
 import TransportationPage from './pages/transportation';
 import WastePage from './pages/waste';
 
@@ -14,7 +14,7 @@ export function App() {
         <div role="navigation">
           <ul>
             <li>
-              <Link to="/home-energy">Home Energy</Link>
+              <Link to="/housing">Housing</Link>
             </li>
             <li>
               <Link to="/transportation">Transportation</Link>
@@ -30,8 +30,8 @@ export function App() {
             element={<StartPage />}
           />
           <Route
-            path="/home-energy"
-            element={<HomeEnergyPage />}
+            path="/housing"
+            element={<HousingPage />}
           />
           <Route
             path="/transportation"

@@ -10,15 +10,17 @@ interface FormsDataType {
   start: {
     householdPeople: number;
   };
-  homeEnergy: {
+  housing: {
     electricity: number;
     naturalGas: number;
     heatingOil: number;
     propane: number;
+    water: number;
   };
   transportation: {
     milesDriven: number;
     milesPerGallon: number;
+    fuelType: string;
   };
   waste: {
     metal: boolean;
@@ -38,15 +40,17 @@ export const FormsDataContext = createContext<FormsDataContextType>({
     start: {
       householdPeople: 0,
     },
-    homeEnergy: {
+    housing: {
       electricity: 0,
       naturalGas: 0,
       heatingOil: 0,
       propane: 0,
+      water: 0,
     },
     transportation: {
       milesDriven: 0,
       milesPerGallon: 0,
+      fuelType: 'gasoline',
     },
     waste: {
       metal: false,
@@ -72,15 +76,17 @@ export const FormsDataProvider: FC<FormsDataProviderProps> = ({ children }) => {
       start: {
         householdPeople: 0,
       },
-      homeEnergy: {
+      housing: {
         electricity: 0,
         naturalGas: 0,
         heatingOil: 0,
         propane: 0,
+        water: 0,
       },
       transportation: {
         milesDriven: 0,
         milesPerGallon: 0,
+        fuelType: 'gasoline',
       },
       waste: {
         metal: false,
