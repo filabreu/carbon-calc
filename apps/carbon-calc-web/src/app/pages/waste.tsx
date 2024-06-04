@@ -1,4 +1,6 @@
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
+
+import { useFormsData } from "../context/forms-data-context";
 
 interface FormValues {
   metal: boolean;
@@ -8,12 +10,13 @@ interface FormValues {
 }
 
 const WastePage = () => {
-  const [formValues, setFormValues] = useState<FormValues>({
-    metal: false,
-    plastic: false,
-    paper: false,
-    glass: false,
-  });
+  const { formsData, setFormsData } = useFormsData();
+
+  const { waste: formValues } = formsData;
+
+  const setFormValues = (formValues: FormValues) => {
+    setFormsData({ ...formsData, waste: formValues });
+  };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();

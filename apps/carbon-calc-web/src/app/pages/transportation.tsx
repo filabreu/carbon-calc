@@ -1,4 +1,6 @@
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
+
+import { useFormsData } from "../context/forms-data-context";
 
 interface FormValues {
   milesDriven: number;
@@ -6,10 +8,13 @@ interface FormValues {
 }
 
 const TransportationPage = () => {
-  const [formValues, setFormValues] = useState<FormValues>({
-    milesDriven: 0,
-    milesPerGallon: 0,
-  });
+  const { formsData, setFormsData } = useFormsData();
+
+  const { transportation: formValues } = formsData;
+
+  const setFormValues = (formValues: FormValues) => {
+    setFormsData({ ...formsData, transportation: formValues });
+  };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();

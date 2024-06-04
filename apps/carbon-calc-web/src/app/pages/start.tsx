@@ -1,13 +1,18 @@
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
+import { useFormsData } from "../context/forms-data-context";
 
 interface FormValues {
   householdPeople: number;
 }
 
 const StartPage = () => {
-  const [formValues, setFormValues] = useState<FormValues>({
-    householdPeople: 0,
-  });
+  const { formsData, setFormsData } = useFormsData();
+
+  const { start: formValues } = formsData;
+
+  const setFormValues = (formValues: FormValues) => {
+    setFormsData({ ...formsData, start: formValues });
+  };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();

@@ -1,4 +1,6 @@
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
+
+import { useFormsData } from "../context/forms-data-context";
 
 interface FormValues {
   electricity: number;
@@ -8,14 +10,13 @@ interface FormValues {
 }
 
 const HomeEnergyPage = () => {
-  const [formValues, setFormValues] = useState<FormValues>(
-    {
-      electricity: 0,
-      naturalGas: 0,
-      heatingOil: 0,
-      propane: 0,
-    }
-  );
+  const { formsData, setFormsData } = useFormsData();
+
+  const { homeEnergy: formValues } = formsData;
+
+  const setFormValues = (formValues: FormValues) => {
+    setFormsData({ ...formsData, homeEnergy: formValues });
+  };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
