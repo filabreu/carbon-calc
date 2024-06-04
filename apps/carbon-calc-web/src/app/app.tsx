@@ -1,9 +1,13 @@
 import { Route, Routes, Link } from 'react-router-dom';
 
+import StartPage from './pages/start';
+import HomeEnergyPage from './pages/home-energy';
+import TransportationPage from './pages/transportation';
+import WastePage from './pages/waste';
+
 export function App() {
   return (
     <div>
-
       {/* START: routes */}
       <div role="navigation">
         <ul>
@@ -20,28 +24,20 @@ export function App() {
       </div>
       <Routes>
         <Route
+          index
+          element={<StartPage />}
+        />
+        <Route
           path="/home-energy"
-          element={
-            <div>
-              Home Energy
-            </div>
-          }
+          element={<HomeEnergyPage />}
         />
         <Route
           path="/transportation"
-          element={
-            <div>
-              Transportation
-            </div>
-          }
+          element={<TransportationPage />}
         />
         <Route
           path="/waste"
-          element={
-            <div>
-              Waste
-            </div>
-          }
+          element={<WastePage />}
         />
       </Routes>
       {/* END: routes */}
