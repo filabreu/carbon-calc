@@ -1,6 +1,7 @@
 type Query {
-  housing: Housing!
-  transportation: Transportation!
+  housing(input: HousingInput!): Housing!
+  transportation(input: TransportationInput!): Transportation!
+  waste(input: WasteInput!): Waste!
 }
 
 type CarbonFootprint {
@@ -8,23 +9,39 @@ type CarbonFootprint {
   metric: String!
 }
 
+input HousingInput {
+  householdPeople: Int!
+  electricityConsumption: Int!
+  heatingOilConsumption: Int!
+  naturalGasConsumption: Int!
+  propaneConsumption: Int!
+}
+
 type Housing {
-  electricity(householdPeople: Int!, consumption: Int!): CarbonFootprint!
-  heatingOil(householdPeople: Int!, consumption: Int!): CarbonFootprint!
-  naturalGas(householdPeople: Int!, consumption: Int!): CarbonFootprint!
-  propane(householdPeople: Int!, consumption: Int!): CarbonFootprint!
+  electricity: CarbonFootprint!
+  heatingOil: CarbonFootprint!
+  naturalGas: CarbonFootprint!
+  propane: CarbonFootprint!
+}
+
+input TransportationInput {
+  milesDriven: Int!
+  milesPerGallon: Int!
+  fuelType: String!
 }
 
 type Transportation {
-  personalVehicle(milesDriven: Int!, milesPerGallon: Int!, fuelType: String!): CarbonFootprint!
+  personalVehicle: CarbonFootprint!
+}
+
+input WasteInput {
+  recyclePaper: Boolean!,
+  recyclePlastic: Boolean!,
+  recycleMetal: Boolean!,
+  recycleGlass: Boolean!,
+  householdPeople: Int!
 }
 
 type Waste {
-  householdEmissions(
-    recyclePaper: Boolean!,
-    recyclePlastic: Boolean!,
-    recycleMetal: Boolean!,
-    recycleGlass: Boolean!,
-    householdPeople: Int!
-  ): CarbonFootprint!
+  personalEmissions: CarbonFootprint!
 }

@@ -7,19 +7,25 @@ const FUEL_TYPE_EMISSIONS = {
   electric: 0,
 };
 
-const Transportation = {
-  personalVehicle: (_, args) => {
-    const { milesDriven, milesPerGallon, fuelType } = args;
+const Transportation = (_, args) => {
+  const { input: { milesDriven, milesPerGallon, fuelType } } = args;
 
-    // Calculate emissions based on weekly miles driven
-    const gallonsConsumed = milesDriven / milesPerGallon;
-    const CO2kg = gallonsConsumed * FUEL_TYPE_EMISSIONS[fuelType];
-    const CO2lbs = kgToLb(CO2kg);
+  return ({
+    personalVehicle:  () => {
+      if (milesPerGallon === 0) {
+        return ({ carbonEmissions: 0, metric: 'lbs' });
+      }
 
-    const carbonEmissions = Math.floor(CO2lbs * 52);
+      // Calculate emissions based on weekly miles driven
+      const gallonsConsumed = milesDriven / milesPerGallon;
+      const CO2kg = gallonsConsumed * FUEL_TYPE_EMISSIONS[fuelType];
+      const CO2lbs = kgToLb(CO2kg);
 
-    return ({ carbonEmissions, metric: 'lbs' });
-  },
+      const carbonEmissions = Math.floor(CO2lbs * 52);
+
+      return ({ carbonEmissions, metric: 'lbs' });
+    },
+  })
 }
 
 export default Transportation;

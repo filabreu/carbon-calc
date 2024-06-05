@@ -1,12 +1,12 @@
 import Housing from './housing';
 import Transportation from './transportation';
+import Waste from './waste';
 
 const resolvers = {
-  Housing,
-  Transportation,
   Query: {
-    housing: () => Housing,
-    transportation: () => Transportation,
+    housing: Housing,
+    transportation: Transportation,
+    waste: Waste,
   }
 };
 
