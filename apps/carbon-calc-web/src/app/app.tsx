@@ -1,6 +1,7 @@
 import { Route, Routes, Link } from 'react-router-dom';
 
 import { FormsDataProvider } from './context/forms-data-context';
+import CarbonEmissions from './components/carbon-emissions';
 import StartPage from './pages/start';
 import HousingPage from './pages/housing';
 import TransportationPage from './pages/transportation';
@@ -43,6 +44,7 @@ export function App() {
           />
         </Routes>
         {/* END: routes */}
+        <CarbonEmissions />
       </div>
     </FormsDataProvider>
   );

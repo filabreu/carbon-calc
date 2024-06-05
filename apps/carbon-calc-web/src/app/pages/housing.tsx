@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FC, FormEvent } from "react";
 
 import { useFormsData } from "../context/forms-data-context";
 
@@ -7,10 +7,9 @@ interface FormValues {
   naturalGas: number;
   heatingOil: number;
   propane: number;
-  water: number;
 }
 
-const HousingPage = () => {
+const HousingPage: FC = () => {
   const { formsData, setFormsData } = useFormsData();
 
   const { housing: formValues } = formsData;
@@ -62,15 +61,6 @@ const HousingPage = () => {
             type="number"
             value={formValues.propane}
             onChange={(event) => setFormValues({ ...formValues, propane: Number(event.target.value) })}
-          />
-        </div>
-        <div>
-          <label htmlFor="water">Water</label>
-          <input
-            id="water"
-            type="number"
-            value={formValues.water}
-            onChange={(event) => setFormValues({ ...formValues, water: Number(event.target.value) })}
           />
         </div>
       </form>

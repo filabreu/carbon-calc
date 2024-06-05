@@ -1,11 +1,11 @@
-import { FormEvent } from "react";
+import { FC, FormEvent } from "react";
 import { useFormsData } from "../context/forms-data-context";
 
 interface FormValues {
   householdPeople: number;
 }
 
-const StartPage = () => {
+const StartPage: FC = () => {
   const { formsData, setFormsData } = useFormsData();
 
   const { start: formValues } = formsData;

@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FC, FormEvent } from "react";
 
 import { useFormsData } from "../context/forms-data-context";
 
@@ -8,7 +8,7 @@ interface FormValues {
   fuelType: string;
 }
 
-const TransportationPage = () => {
+const TransportationPage: FC = () => {
   const { formsData, setFormsData } = useFormsData();
 
   const { transportation: formValues } = formsData;

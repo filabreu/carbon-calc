@@ -15,7 +15,6 @@ interface FormsDataType {
     naturalGas: number;
     heatingOil: number;
     propane: number;
-    water: number;
   };
   transportation: {
     milesDriven: number;
@@ -45,7 +44,6 @@ export const FormsDataContext = createContext<FormsDataContextType>({
       naturalGas: 0,
       heatingOil: 0,
       propane: 0,
-      water: 0,
     },
     transportation: {
       milesDriven: 0,
@@ -81,7 +79,6 @@ export const FormsDataProvider: FC<FormsDataProviderProps> = ({ children }) => {
         naturalGas: 0,
         heatingOil: 0,
         propane: 0,
-        water: 0,
       },
       transportation: {
         milesDriven: 0,

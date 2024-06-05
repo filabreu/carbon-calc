@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FC, FormEvent } from "react";
 
 import { useFormsData } from "../context/forms-data-context";
 
@@ -9,7 +9,7 @@ interface FormValues {
   glass: boolean;
 }
 
-const WastePage = () => {
+const WastePage: FC = () => {
   const { formsData, setFormsData } = useFormsData();
 
   const { waste: formValues } = formsData;
