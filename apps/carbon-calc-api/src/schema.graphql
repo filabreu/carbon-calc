@@ -1,0 +1,30 @@
+type Query {
+  housing: Housing!
+  transportation: Transportation!
+}
+
+type CarbonFootprint {
+  carbonEmissions: Int!
+  metric: String!
+}
+
+type Housing {
+  electricity(householdPeople: Int!, consumption: Int!): CarbonFootprint!
+  heatingOil(householdPeople: Int!, consumption: Int!): CarbonFootprint!
+  naturalGas(householdPeople: Int!, consumption: Int!): CarbonFootprint!
+  propane(householdPeople: Int!, consumption: Int!): CarbonFootprint!
+}
+
+type Transportation {
+  personalVehicle(milesDriven: Int!, milesPerGallon: Int!, fuelType: String!): CarbonFootprint!
+}
+
+type Waste {
+  householdEmissions(
+    recyclePaper: Boolean!,
+    recyclePlastic: Boolean!,
+    recycleMetal: Boolean!,
+    recycleGlass: Boolean!,
+    householdPeople: Int!
+  ): CarbonFootprint!
+}

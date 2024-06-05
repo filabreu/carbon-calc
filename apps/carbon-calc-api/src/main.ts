@@ -1,30 +1,34 @@
 import express from 'express';
-import { ApolloServer, gql } from 'apollo-server-express';
+import cors from 'cors';
+import gql from "graphql-tag";
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { readFileSync } from "fs";
+
+import resolvers from "./resolvers";
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
+const typeDefs = gql(
+  readFileSync("apps/carbon-calc-api/src/schema.graphql", {
+    encoding: "utf-8",
+  })
+);
 
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!',
-  }
-}
-
-const apolloServer = new ApolloServer({ typeDefs, resolvers});
+const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
 const app = express();
-apolloServer.applyMiddleware({ app });
-
+app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
+apolloServer.start().then(() => {
+  app.use(
+    '/graphql',
+    cors(),
+    express.json(),
+    expressMiddleware(apolloServer),
+  );
 });
 
 app.post('/housing/electricity', (req, res) => {
