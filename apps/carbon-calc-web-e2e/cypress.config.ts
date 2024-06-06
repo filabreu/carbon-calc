@@ -13,6 +13,6 @@ export default defineConfig({
       ciWebServerCommand: 'nx run carbon-calc-web:serve-static',
     }),
     baseUrl: 'http://localhost:4200',
-    chromeWebSecurity: false,
   },
+  chromeWebSecurity: false,
 });

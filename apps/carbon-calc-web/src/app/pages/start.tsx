@@ -1,5 +1,9 @@
 import { FC, FormEvent } from "react";
 import { useFormsData } from "../context/forms-data-context";
+import {
+  TextField,
+  Typography,
+} from "@mui/material";
 
 interface FormValues {
   householdPeople: number;
@@ -20,12 +24,12 @@ const StartPage: FC = () => {
   }
 
   return (
-    <div>
-      <h1>What is your carbon footprint?</h1>
+    <>
+      <Typography variant="h2">What is your carbon footprint?</Typography>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="householdPeople">How many people are in your household?</label>
-          <input
+          <Typography>How many people are in your household?</Typography>
+          <TextField
             id="householdPeople"
             type="number"
             value={formValues.householdPeople}
@@ -36,7 +40,7 @@ const StartPage: FC = () => {
         </div>
         <input type="submit" value="Get Started" />
       </form>
-    </div>
+    </>
   );
 }
 
