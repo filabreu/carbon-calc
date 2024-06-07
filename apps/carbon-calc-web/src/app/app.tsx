@@ -16,19 +16,6 @@ export function App() {
       <Container>
         <Stack spacing={4}>
           {/* START: routes */}
-          <div role="navigation">
-            <ul>
-              <li>
-                <Link to="/housing">Housing</Link>
-              </li>
-              <li>
-                <Link to="/transportation">Transportation</Link>
-              </li>
-              <li>
-                <Link to="/waste">Waste</Link>
-              </li>
-            </ul>
-          </div>
           <Typography variant="h2" align="center">What is your personal carbon footprint?</Typography>
           <Routes>
             <Route
