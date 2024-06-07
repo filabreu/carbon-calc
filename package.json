@@ -2,7 +2,10 @@
   "name": "@carbon-calc/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build:api": "nx run carbon-calc-api:build",
+    "build:web": "nx run carbon-calc-web:build"
+  },
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.10.4",
