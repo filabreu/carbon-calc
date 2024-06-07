@@ -1,4 +1,14 @@
-import { FC, FormEvent } from "react";
+import { FC } from "react";
+import { Link } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+  Paper,
+  Typography,
+} from "@mui/material";
 
 import { useFormsData } from "../context/forms-data-context";
 
@@ -18,61 +28,76 @@ const WastePage: FC = () => {
     setFormsData({ ...formsData, waste: formValues });
   };
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    console.log("Form submitted", formValues);
-  }
-
   return (
-    <div>
-      <h1>Waste</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="metal">Metal</label>
-          <input
-            id="metal"
-            type="checkbox"
-            checked={formValues.metal}
-            onChange={(event) =>
-              setFormValues({ ...formValues, metal: event.target.checked })
+    <Paper elevation={4}>
+      <Box
+        my={20}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        flexDirection="column"
+        gap={2}
+        p={2}
+      >
+        <Typography variant="h2">Waste</Typography>
+        <Typography variant="h4">What types of waste do you recycle?</Typography>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="metal"
+                size="large"
+                onChange={(event) =>
+                  setFormValues({ ...formValues, metal: event.target.checked })
+                }
+              />
             }
+            label="Metal"
           />
-        </div>
-        <div>
-          <label htmlFor="plastic">Plastic</label>
-          <input
-            id="plastic"
-            type="checkbox"
-            checked={formValues.plastic}
-            onChange={(event) =>
-              setFormValues({ ...formValues, plastic: event.target.checked })
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="plastic"
+                size="large"
+                onChange={(event) =>
+                  setFormValues({ ...formValues, plastic: event.target.checked })
+                }
+              />
             }
+            label="Plastic"
           />
-        </div>
-        <div>
-          <label htmlFor="paper">Paper</label>
-          <input
-            id="paper"
-            type="checkbox"
-            checked={formValues.paper}
-            onChange={(event) =>
-              setFormValues({ ...formValues, paper: event.target.checked })
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="paper"
+                size="large"
+                onChange={(event) =>
+                  setFormValues({ ...formValues, paper: event.target.checked })
+                }
+              />
             }
+            label="Paper"
           />
-        </div>
-        <div>
-          <label htmlFor="glass">Glass</label>
-          <input
-            id="glass"
-            type="checkbox"
-            checked={formValues.glass}
-            onChange={(event) =>
-              setFormValues({ ...formValues, glass: event.target.checked })
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="glass"
+                size="large"
+                onChange={(event) =>
+                  setFormValues({ ...formValues, glass: event.target.checked })
+                }
+              />
             }
+            label="Glass"
           />
-        </div>
-      </form>
-    </div>
+        </FormGroup>
+        <Link to="/emissions">
+          <Button variant="contained">
+            Next
+          </Button>
+        </Link>
+      </Box>
+    </Paper>
   );
 }
 

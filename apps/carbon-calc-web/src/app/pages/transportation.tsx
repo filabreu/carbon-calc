@@ -1,11 +1,23 @@
-import { FC, FormEvent } from "react";
+import { FC } from "react";
+import { Link } from "react-router-dom";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  TextField,
+  Typography
+} from "@mui/material";
 
 import { useFormsData } from "../context/forms-data-context";
 
 interface FormValues {
-  milesDriven: number;
-  milesPerGallon: number;
-  fuelType: string;
+  milesDriven: number | null;
+  milesPerGallon: number | null;
+  fuelType: string | null;
 }
 
 const TransportationPage: FC = () => {
@@ -17,53 +29,68 @@ const TransportationPage: FC = () => {
     setFormsData({ ...formsData, transportation: formValues });
   };
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    console.log('Form submitted', formValues);
-  }
-
   return (
-    <div>
-      <h1>Transportation</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="milesDriven">Personal Vehicle Miles Driven / week</label>
-          <input
+    <Paper elevation={4}>
+      <Box
+        my={20}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        flexDirection="column"
+        gap={2}
+        p={2}
+      >
+        <Typography variant="h2">Transportation</Typography>
+        <Typography variant="h4">How much you drive with your personal vehicle per week?</Typography>
+        <Box
+          display="flex"
+          alignItems="stretch"
+          justifyContent="center"
+          flexDirection="column"
+          gap={2}
+          p={2}
+        >
+          <TextField
             id="milesDriven"
             type="number"
+            label="Miles Driven / Week"
             value={formValues.milesDriven}
             onChange={(event) =>
               setFormValues({ ...formValues, milesDriven: Number(event.target.value) })
             }
           />
-        </div>
-        <div>
-          <label htmlFor="milesPerGallon">Personal Vehicle Miles Per Gallon</label>
-          <input
+          <TextField
             id="milesPerGallon"
             type="number"
+            label="Miles Per Gallon"
             value={formValues.milesPerGallon}
             onChange={(event) =>
               setFormValues({ ...formValues, milesPerGallon: Number(event.target.value) })
             }
           />
-        </div>
-        <div>
-          <label htmlFor="fuelType">Personal Vehicle Fuel Type</label>
-          <select
-            id="fuelType"
-            value={formValues.milesPerGallon}
-            onChange={(event) =>
-              setFormValues({ ...formValues, fuelType: event.target.value })
-            }
-          >
-            <option value="gasoline">Gasoline</option>
-            <option value="diesel">Diesel</option>
-            <option value="ethanol">Ethanol</option>
-          </select>
-        </div>
-      </form>
-    </div>
+          <FormControl fullWidth>
+            <InputLabel>Fuel Type</InputLabel>
+            <Select
+              id="fuel-type"
+              value={formValues.fuelType}
+              label="Fuel Type"
+              onChange={(event) =>
+                setFormValues({ ...formValues, fuelType: event.target.value })
+              }
+            >
+              <MenuItem value="gasoline">Gasoline</MenuItem>
+              <MenuItem value="diesel">Diesel</MenuItem>
+              <MenuItem value="ethanol">Ethanol</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Link to="/waste">
+          <Button variant="contained">
+            Next
+          </Button>
+        </Link>
+      </Box>
+    </Paper>
   );
 }
 

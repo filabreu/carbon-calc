@@ -8,18 +8,18 @@ import {
 
 interface FormsDataType {
   start: {
-    householdPeople: number;
+    householdPeople: number | null;
   };
   housing: {
-    electricity: number;
-    naturalGas: number;
-    heatingOil: number;
-    propane: number;
+    electricity: number| null;
+    naturalGas: number| null;
+    heatingOil: number| null;
+    propane: number| null;
   };
   transportation: {
-    milesDriven: number;
-    milesPerGallon: number;
-    fuelType: string;
+    milesDriven: number| null;
+    milesPerGallon: number| null;
+    fuelType: string | null;
   };
   waste: {
     metal: boolean;
@@ -32,23 +32,24 @@ interface FormsDataType {
 interface FormsDataContextType {
   formsData: FormsDataType;
   setFormsData: (formsData: FormsDataType) => void;
+  resetFormsData: () => void;
 }
 
 export const FormsDataContext = createContext<FormsDataContextType>({
   formsData: {
     start: {
-      householdPeople: 0,
+      householdPeople: null,
     },
     housing: {
-      electricity: 0,
-      naturalGas: 0,
-      heatingOil: 0,
-      propane: 0,
+      electricity: null,
+      naturalGas: null,
+      heatingOil: null,
+      propane: null,
     },
     transportation: {
-      milesDriven: 0,
-      milesPerGallon: 0,
-      fuelType: 'gasoline',
+      milesDriven: null,
+      milesPerGallon: null,
+      fuelType: null,
     },
     waste: {
       metal: false,
@@ -60,6 +61,9 @@ export const FormsDataContext = createContext<FormsDataContextType>({
   setFormsData: () => {
     return;
   },
+  resetFormsData: () => {
+    return;
+  },
 });
 
 export const useFormsData = () => useContext(FormsDataContext);
@@ -69,34 +73,36 @@ interface FormsDataProviderProps {
 }
 
 export const FormsDataProvider: FC<FormsDataProviderProps> = ({ children }) => {
-  const [formsData, setFormsData] = useState<FormsDataType>(
-    {
-      start: {
-        householdPeople: 0,
-      },
-      housing: {
-        electricity: 0,
-        naturalGas: 0,
-        heatingOil: 0,
-        propane: 0,
-      },
-      transportation: {
-        milesDriven: 0,
-        milesPerGallon: 0,
-        fuelType: 'gasoline',
-      },
-      waste: {
-        metal: false,
-        plastic: false,
-        paper: false,
-        glass: false,
-      },
-    }
-  );
+  const defaultState = {
+    start: {
+      householdPeople: null,
+    },
+    housing: {
+      electricity: null,
+      naturalGas: null,
+      heatingOil: null,
+      propane: null,
+    },
+    transportation: {
+      milesDriven: null,
+      milesPerGallon: null,
+      fuelType: null,
+    },
+    waste: {
+      metal: false,
+      plastic: false,
+      paper: false,
+      glass: false,
+    },
+  };
+
+  const [formsData, setFormsData] = useState<FormsDataType>(defaultState);
+
+  const resetFormsData = () => setFormsData(defaultState);
 
   return (
     <FormsDataContext.Provider
-      value={{formsData, setFormsData}}
+      value={{formsData, setFormsData, resetFormsData}}
     >
       {children}
     </FormsDataContext.Provider>
